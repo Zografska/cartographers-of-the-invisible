@@ -12,7 +12,7 @@ from typing import Optional, Tuple
 def create_plot(
     df: pd.DataFrame,
     x: str,
-    y: str,
+    y: Optional[str] = None,
     kind: str = 'scatter',
     title: Optional[str] = None,
     figsize: Tuple[int, int] = (10, 6),
@@ -24,7 +24,7 @@ def create_plot(
     Args:
         df: Input DataFrame
         x: Column name for x-axis
-        y: Column name for y-axis
+        y: Column name for y-axis (not used for 'hist')
         kind: Type of plot ('scatter', 'line', 'bar', 'hist')
         title: Plot title
         figsize: Figure size (width, height)
@@ -36,18 +36,27 @@ def create_plot(
     fig, ax = plt.subplots(figsize=figsize)
     
     if kind == 'scatter':
+        if y is None:
+            raise ValueError("y parameter is required for scatter plots")
         ax.scatter(df[x], df[y], **kwargs)
+        ax.set_ylabel(y)
     elif kind == 'line':
+        if y is None:
+            raise ValueError("y parameter is required for line plots")
         ax.plot(df[x], df[y], **kwargs)
+        ax.set_ylabel(y)
     elif kind == 'bar':
+        if y is None:
+            raise ValueError("y parameter is required for bar plots")
         ax.bar(df[x], df[y], **kwargs)
+        ax.set_ylabel(y)
     elif kind == 'hist':
         ax.hist(df[x], **kwargs)
+        ax.set_ylabel('Frequency')
     else:
         raise ValueError(f"Unsupported plot type: {kind}")
     
     ax.set_xlabel(x)
-    ax.set_ylabel(y)
     
     if title:
         ax.set_title(title)
@@ -59,7 +68,7 @@ def create_plot(
 def create_interactive_chart(
     df: pd.DataFrame,
     x: str,
-    y: str,
+    y: Optional[str] = None,
     kind: str = 'scatter',
     title: Optional[str] = None,
     color: Optional[str] = None,
@@ -71,8 +80,8 @@ def create_interactive_chart(
     Args:
         df: Input DataFrame
         x: Column name for x-axis
-        y: Column name for y-axis
-        kind: Type of chart ('scatter', 'line', 'bar', 'histogram')
+        y: Column name for y-axis (not used for 'hist')
+        kind: Type of chart ('scatter', 'line', 'bar', 'hist')
         title: Chart title
         color: Column name for color encoding
         **kwargs: Additional arguments for Plotly
@@ -81,12 +90,18 @@ def create_interactive_chart(
         Plotly Figure object
     """
     if kind == 'scatter':
+        if y is None:
+            raise ValueError("y parameter is required for scatter charts")
         fig = px.scatter(df, x=x, y=y, color=color, title=title, **kwargs)
     elif kind == 'line':
+        if y is None:
+            raise ValueError("y parameter is required for line charts")
         fig = px.line(df, x=x, y=y, color=color, title=title, **kwargs)
     elif kind == 'bar':
+        if y is None:
+            raise ValueError("y parameter is required for bar charts")
         fig = px.bar(df, x=x, y=y, color=color, title=title, **kwargs)
-    elif kind == 'histogram':
+    elif kind == 'hist':
         fig = px.histogram(df, x=x, color=color, title=title, **kwargs)
     else:
         raise ValueError(f"Unsupported chart type: {kind}")
