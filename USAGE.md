@@ -356,16 +356,21 @@ from cartographers.visualization import create_interactive_chart
 # Load high-dimensional embeddings
 embeddings = load_data('bert_embeddings.csv')
 
+# Separate features and labels
+feature_cols = [col for col in embeddings.columns if col != 'label']
+X = embeddings[feature_cols]
+labels = embeddings['label']
+
 # Apply UMAP for dimensionality reduction
 reducer = umap.UMAP(n_components=2, random_state=42)
-embedding_2d = reducer.fit_transform(embeddings.iloc[:, :-1])  # Exclude labels
+embedding_2d = reducer.fit_transform(X)
 
 # Create DataFrame with reduced dimensions
 reduced_df = pd.DataFrame(
     embedding_2d,
     columns=['umap1', 'umap2']
 )
-reduced_df['label'] = embeddings['label']
+reduced_df['label'] = labels
 
 # Visualize
 fig = create_interactive_chart(
