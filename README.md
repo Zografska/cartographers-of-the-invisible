@@ -1,19 +1,80 @@
 # Cartographers of the Invisible 🗺️
 
-A Python package for data analysis and visualization, with an interactive Streamlit web application for exploring your data.
+> Mapping the hidden geometries of meaning in Large Language Models
 
-## Features
+## Project Overview
 
-- 📊 **Python Modules**: Reusable utilities for data loading, processing, and visualization
-- 🎨 **Interactive Visualizations**: Create beautiful charts using Matplotlib and Plotly
-- 🚀 **Streamlit App**: Web-based interface for exploring and visualizing data
-- 📓 **Jupyter Integration**: Easy to use in notebooks for analysis workflows
+**Cartographers of the Invisible** is a research and visualization project aimed at **mapping how Large Language Models (LLMs) represent meaning across linguistic and multimodal spaces**. By combining embedding analysis, visualization, and interpretability techniques, this project makes abstract representations visible, revealing how models cluster, separate, and relate concepts.
 
-## Installation
+The goal is to design an interactive pipeline that transforms raw embeddings into navigable semantic maps, helping humans intuitively explore what the model "knows" and how that knowledge is structured.
 
-### From Source
+## Project Goals
 
-Clone the repository and install the package:
+### 🎯 Core Objectives
+
+1. **Extract and Analyze Embeddings**: Generate embeddings from LLMs across diverse linguistic and multimodal inputs to understand how models encode semantic information.
+
+2. **Visualize Semantic Spaces**: Create interactive, intuitive visualizations that transform high-dimensional embedding spaces into comprehensible 2D/3D maps, revealing:
+   - How concepts cluster together
+   - How meanings separate and relate
+   - The geometric structure of model knowledge
+   - Cross-modal relationships (text, images, etc.)
+
+3. **Enable Explorability**: Build tools that allow researchers and students to:
+   - Navigate semantic landscapes interactively
+   - Query relationships between concepts
+   - Discover emergent patterns in model representations
+   - Understand how context affects meaning
+
+4. **Foster Interpretability**: Make the "invisible" visible by providing insights into:
+   - What features models use to distinguish concepts
+   - How similar or different concepts are in the model's internal space
+   - What biases or structures emerge from training data
+   - How representations evolve across model layers
+
+## Research Questions
+
+This project explores fundamental questions about LLM representations:
+
+- **Topology of Meaning**: What geometric patterns emerge in semantic spaces? Are certain concepts universally close or distant across models?
+
+- **Multimodal Alignment**: How do models align representations across modalities (e.g., text and images)? What does this reveal about cross-modal understanding?
+
+- **Semantic Neighborhoods**: What makes concepts "neighbors" in embedding space? Can we identify meaningful clusters?
+
+- **Context Sensitivity**: How do embeddings shift with context? What does this tell us about how models handle ambiguity and polysemy?
+
+- **Model Comparison**: How do different models or architectures structure semantic space differently?
+
+## Methodology
+
+The project combines several technical approaches:
+
+1. **Embedding Extraction**: Leverage pre-trained LLMs (e.g., BERT, GPT, CLIP) to generate embeddings for diverse inputs
+
+2. **Dimensionality Reduction**: Apply techniques like t-SNE, UMAP, PCA to project high-dimensional embeddings into visualizable spaces
+
+3. **Clustering & Analysis**: Use clustering algorithms to identify semantic groupings and analyze their characteristics
+
+4. **Interactive Visualization**: Build web-based interfaces for exploring semantic maps with zooming, filtering, and querying capabilities
+
+5. **Interpretability Tools**: Implement techniques to understand what features drive similarity/difference in the embedding space
+
+## Technical Stack
+
+This project provides a foundational toolkit built with:
+
+- **Python** for data processing and analysis
+- **Pandas & NumPy** for data manipulation
+- **Matplotlib & Plotly** for static and interactive visualizations
+- **Streamlit** for building interactive web applications
+- **Jupyter Notebooks** for exploratory analysis and documentation
+
+> **Note**: The current repository contains the scaffolding and foundational tools for this project. See [USAGE.md](USAGE.md) for technical documentation on the available modules and how to use them.
+
+## Getting Started
+
+### Installation
 
 ```bash
 git clone https://github.com/Zografska/cartographers-of-the-invisible.git
@@ -21,166 +82,56 @@ cd cartographers-of-the-invisible
 pip install -e .
 ```
 
-### Install Dependencies
+### Quick Start
 
-To install all dependencies including the Streamlit app:
-
-```bash
-pip install -r requirements.txt
-```
-
-Or install specific components:
-
-```bash
-# Core package only
-pip install -e .
-
-# With Streamlit app
-pip install -e ".[app]"
-
-# With development tools
-pip install -e ".[dev]"
-```
-
-## Quick Start
-
-### Using Python Modules
-
-The package provides utilities for data analysis and visualization:
-
-```python
-from cartographers.data_utils import load_data, process_data, get_summary_statistics
-from cartographers.visualization import create_plot, create_interactive_chart
-
-# Load and process data
-df = load_data('data.csv')
-processed_df = process_data(df, normalize=True)
-
-# Create visualizations
-fig = create_interactive_chart(df, x='column1', y='column2', kind='scatter')
-fig.show()
-```
-
-### Running the Streamlit App
-
-Launch the interactive web application:
-
-```bash
-streamlit run app.py
-```
-
-The app will open in your browser at `http://localhost:8501` and allows you to:
-- Upload your own data files (CSV, Excel, JSON, Parquet)
-- Explore data with interactive visualizations
-- Generate summary statistics
-- Filter and transform data
-- Download processed data
-
-### Using Jupyter Notebooks
-
-Check out the example notebook in the `notebooks/` directory:
-
-```bash
-jupyter notebook notebooks/example_usage.ipynb
-```
+The project provides Python modules for data analysis and an interactive Streamlit app for visualization. For detailed usage instructions, see [USAGE.md](USAGE.md).
 
 ## Project Structure
 
 ```
 cartographers-of-the-invisible/
-├── src/
-│   └── cartographers/
-│       ├── __init__.py          # Package initialization
-│       ├── data_utils.py        # Data loading and processing utilities
-│       └── visualization.py     # Visualization functions
-├── notebooks/
-│   └── example_usage.ipynb      # Example Jupyter notebook
-├── app.py                        # Streamlit web application
-├── setup.py                      # Package setup configuration
-├── requirements.txt              # Project dependencies
-└── README.md                     # This file
+├── src/cartographers/       # Python package with reusable utilities
+├── notebooks/               # Jupyter notebooks for analysis
+├── app.py                   # Streamlit visualization application
+├── README.md               # Project overview (this file)
+└── USAGE.md                # Technical documentation
 ```
 
-## Module Documentation
+## Future Directions
 
-### data_utils
+This project is designed to evolve as research progresses. Future enhancements may include:
 
-Functions for loading and processing data:
-
-- `load_data(filepath, **kwargs)`: Load data from various file formats (CSV, JSON, Excel, Parquet)
-- `process_data(df, columns=None, dropna=False, normalize=False)`: Clean and transform data
-- `get_summary_statistics(df)`: Get comprehensive statistics about your dataset
-
-### visualization
-
-Functions for creating visualizations:
-
-- `create_plot(df, x, y, kind='scatter', **kwargs)`: Create matplotlib plots
-- `create_interactive_chart(df, x, y, kind='scatter', **kwargs)`: Create interactive Plotly charts
-- `create_heatmap(df, **kwargs)`: Create correlation heatmaps
-
-## Examples
-
-### Load and Process Data
-
-```python
-from cartographers.data_utils import load_data, process_data
-
-# Load data
-df = load_data('mydata.csv')
-
-# Process: select columns, drop missing values, normalize
-processed_df = process_data(
-    df,
-    columns=['col1', 'col2', 'col3'],
-    dropna=True,
-    normalize=True
-)
-```
-
-### Create Visualizations
-
-```python
-from cartographers.visualization import create_interactive_chart, create_heatmap
-
-# Interactive scatter plot
-fig = create_interactive_chart(
-    df,
-    x='temperature',
-    y='humidity',
-    kind='scatter',
-    color='category',
-    title='Temperature vs Humidity'
-)
-fig.show()
-
-# Correlation heatmap
-fig = create_heatmap(df, title='Feature Correlations')
-fig.show()
-```
-
-## Requirements
-
-- Python >= 3.8
-- pandas >= 2.0.0
-- numpy >= 1.24.0
-- matplotlib >= 3.7.0
-- plotly >= 5.14.0
-- streamlit >= 1.28.0 (for the web app)
-- openpyxl >= 3.1.0 (for Excel support)
+- Integration with specific LLM APIs for embedding extraction
+- Advanced clustering and semantic analysis algorithms
+- Multi-layer embedding analysis to track how representations evolve
+- Comparative analysis across different model architectures
+- Real-time embedding generation and visualization
+- Tools for bias detection and fairness analysis in semantic spaces
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+This is an educational and research project. Contributions, ideas, and discussions are welcome! Please feel free to:
+- Open issues to discuss ideas or report problems
+- Submit pull requests with improvements
+- Share interesting findings from your explorations
+
+## Educational Context
+
+This project is designed for students and researchers exploring:
+- Natural Language Processing and LLMs
+- Machine Learning interpretability
+- Data visualization and visual analytics
+- Computational semantics
+- Human-AI interaction
 
 ## License
 
 This project is open source and available under the MIT License.
 
-## Authors
+## Acknowledgments
 
-Cartographers Team
+Inspired by the need to make AI systems more interpretable and the fascinating geometry of meaning encoded in neural networks.
 
-## Support
+---
 
-If you encounter any issues or have questions, please open an issue on GitHub.
+**For technical documentation and usage instructions, see [USAGE.md](USAGE.md).**
