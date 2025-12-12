@@ -13,13 +13,6 @@ import sys
 # Add src to path for local imports
 sys.path.insert(0, str(Path(__file__).parent / "src"))
 
-try:
-    from cartographers.data_utils import load_data, process_data, get_summary_statistics
-    from cartographers.visualization import create_interactive_chart, create_heatmap
-except ImportError:
-    st.warning("Cartographers modules not found. Using inline functions.")
-    # Fallback to basic functionality if package not installed
-
 
 st.set_page_config(
     page_title="Cartographers of the Invisible",
