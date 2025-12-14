@@ -57,8 +57,8 @@ These tools are designed to be extended and adapted for embedding analysis, sema
 The package provides utilities for data analysis and visualization:
 
 ```python
-from cartographers.data_utils import load_data, process_data, get_summary_statistics
-from cartographers.visualization import create_plot, create_interactive_chart
+from cartographers.utils.data_utils import load_data, process_data, get_summary_statistics
+from cartographers.utils.visualization import create_plot, create_interactive_chart
 
 # Load and process data
 df = load_data('data.csv')
@@ -78,6 +78,7 @@ streamlit run app.py
 ```
 
 The app will open in your browser at `http://localhost:8501` and allows you to:
+
 - Upload your own data files (CSV, Excel, JSON, Parquet)
 - Explore data with interactive visualizations
 - Generate summary statistics
@@ -121,21 +122,25 @@ Functions for loading and processing data:
 Load data from various file formats.
 
 **Parameters:**
+
 - `filepath` (str): Path to the data file
 - `**kwargs`: Additional arguments to pass to pandas read functions
 
 **Supported formats:**
+
 - CSV (`.csv`)
 - JSON (`.json`)
 - Excel (`.xls`, `.xlsx`)
 - Parquet (`.parquet`)
 
 **Returns:**
+
 - `pd.DataFrame`: DataFrame containing the loaded data
 
 **Example:**
+
 ```python
-from cartographers.data_utils import load_data
+from cartographers.utils.data_utils import load_data
 
 df = load_data('embeddings.csv')
 ```
@@ -145,17 +150,20 @@ df = load_data('embeddings.csv')
 Process and clean data.
 
 **Parameters:**
+
 - `df` (pd.DataFrame): Input DataFrame
 - `columns` (list, optional): List of columns to keep (None keeps all)
 - `dropna` (bool): Whether to drop rows with missing values
 - `normalize` (bool): Whether to normalize numeric columns
 
 **Returns:**
+
 - `pd.DataFrame`: Processed DataFrame
 
 **Example:**
+
 ```python
-from cartographers.data_utils import process_data
+from cartographers.utils.data_utils import process_data
 
 processed_df = process_data(
     df,
@@ -170,14 +178,17 @@ processed_df = process_data(
 Get summary statistics for a DataFrame.
 
 **Parameters:**
+
 - `df` (pd.DataFrame): Input DataFrame
 
 **Returns:**
+
 - `dict`: Dictionary containing summary statistics including shape, columns, dtypes, missing values, and numeric summaries
 
 **Example:**
+
 ```python
-from cartographers.data_utils import get_summary_statistics
+from cartographers.utils.data_utils import get_summary_statistics
 
 stats = get_summary_statistics(df)
 print(f"Dataset shape: {stats['shape']}")
@@ -193,6 +204,7 @@ Functions for creating visualizations:
 Create a matplotlib plot.
 
 **Parameters:**
+
 - `df` (pd.DataFrame): Input DataFrame
 - `x` (str): Column name for x-axis
 - `y` (str, optional): Column name for y-axis (not used for 'hist')
@@ -202,11 +214,13 @@ Create a matplotlib plot.
 - `**kwargs`: Additional arguments for plotting
 
 **Returns:**
+
 - `matplotlib.figure.Figure`: Matplotlib Figure object
 
 **Example:**
+
 ```python
-from cartographers.visualization import create_plot
+from cartographers.utils.visualization import create_plot
 
 fig = create_plot(
     df,
@@ -224,6 +238,7 @@ fig.show()
 Create an interactive Plotly chart.
 
 **Parameters:**
+
 - `df` (pd.DataFrame): Input DataFrame
 - `x` (str): Column name for x-axis
 - `y` (str, optional): Column name for y-axis (not used for 'hist')
@@ -233,11 +248,13 @@ Create an interactive Plotly chart.
 - `**kwargs`: Additional arguments for Plotly
 
 **Returns:**
+
 - `plotly.graph_objects.Figure`: Plotly Figure object
 
 **Example:**
+
 ```python
-from cartographers.visualization import create_interactive_chart
+from cartographers.utils.visualization import create_interactive_chart
 
 fig = create_interactive_chart(
     df,
@@ -256,16 +273,19 @@ fig.show()
 Create a correlation heatmap for numeric columns.
 
 **Parameters:**
+
 - `df` (pd.DataFrame): Input DataFrame
 - `title` (str, optional): Chart title
 - `**kwargs`: Additional arguments for Plotly
 
 **Returns:**
+
 - `plotly.graph_objects.Figure`: Plotly Figure object
 
 **Example:**
+
 ```python
-from cartographers.visualization import create_heatmap
+from cartographers.utils.visualization import create_heatmap
 
 fig = create_heatmap(df, title='Feature Correlations')
 fig.show()
@@ -276,7 +296,7 @@ fig.show()
 ### Load and Process Embedding Data
 
 ```python
-from cartographers.data_utils import load_data, process_data
+from cartographers.utils.data_utils import load_data, process_data
 
 # Load embedding data
 embeddings_df = load_data('llm_embeddings.csv')
@@ -293,7 +313,7 @@ processed_embeddings = process_data(
 ### Create Visualizations for Embeddings
 
 ```python
-from cartographers.visualization import create_interactive_chart, create_heatmap
+from cartographers.utils.visualization import create_interactive_chart, create_heatmap
 
 # Interactive scatter plot of embedding space
 fig = create_interactive_chart(
@@ -322,6 +342,7 @@ The included Streamlit app provides an interactive interface for:
 4. **Export**: Download processed data
 
 Run the app:
+
 ```bash
 streamlit run app.py
 ```
@@ -350,8 +371,8 @@ This scaffolding is designed to be extended for LLM-specific functionality:
 # Example of how you might extend the toolkit
 import umap
 import pandas as pd
-from cartographers.data_utils import load_data
-from cartographers.visualization import create_interactive_chart
+from cartographers.utils.data_utils import load_data
+from cartographers.utils.visualization import create_interactive_chart
 
 # Load high-dimensional embeddings
 embeddings = load_data('bert_embeddings.csv')
@@ -397,6 +418,7 @@ fig.show()
 ## Contributing
 
 Contributions to extend this toolkit are welcome! Please feel free to:
+
 - Add new visualization methods
 - Implement embedding extraction utilities
 - Enhance the Streamlit app with new features
@@ -405,6 +427,7 @@ Contributions to extend this toolkit are welcome! Please feel free to:
 ## Support
 
 If you encounter any issues or have questions:
+
 1. Check this documentation
 2. Review the example notebook in `notebooks/example_usage.ipynb`
 3. Open an issue on GitHub

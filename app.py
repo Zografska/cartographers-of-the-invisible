@@ -142,10 +142,15 @@ if df is not None:
             color_col = st.selectbox("Color by", [None] + all_cols, key='scatter_color')
             
             try:
-                from cartographers.visualization import create_interactive_chart
-                fig = create_interactive_chart(df, x=x_col, y=y_col, kind='scatter', 
-                                             color=color_col, 
-                                             title=f"{y_col} vs {x_col}")
+                from cartographers.utils.visualization import create_interactive_chart
+                fig = create_interactive_chart(
+                    df,
+                    x=x_col,
+                    y=y_col,
+                    kind='scatter',
+                    color=color_col,
+                    title=f"{y_col} vs {x_col}"
+                )
                 st.plotly_chart(fig, use_container_width=True)
             except:
                 import plotly.express as px
@@ -160,10 +165,15 @@ if df is not None:
             color_col_line = st.selectbox("Color by", [None] + all_cols, key='line_color')
             
             try:
-                from cartographers.visualization import create_interactive_chart
-                fig = create_interactive_chart(df, x=x_col_line, y=y_col_line, kind='line',
-                                             color=color_col_line,
-                                             title=f"{y_col_line} over {x_col_line}")
+                from cartographers.utils.visualization import create_interactive_chart
+                fig = create_interactive_chart(
+                    df,
+                    x=x_col_line,
+                    y=y_col_line,
+                    kind='line',
+                    color=color_col_line,
+                    title=f"{y_col_line} over {x_col_line}"
+                )
                 st.plotly_chart(fig, use_container_width=True)
             except:
                 import plotly.express as px
@@ -175,7 +185,7 @@ if df is not None:
             st.subheader("Correlation Heatmap")
             if len(numeric_cols) >= 2:
                 try:
-                    from cartographers.visualization import create_heatmap
+                    from cartographers.utils.visualization import create_heatmap
                     fig = create_heatmap(df)
                     st.plotly_chart(fig, use_container_width=True)
                 except:
