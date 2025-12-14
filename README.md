@@ -15,12 +15,14 @@ The goal is to design an interactive pipeline that transforms raw embeddings int
 1. **Extract and Analyze Embeddings**: Generate embeddings from LLMs across diverse linguistic and multimodal inputs to understand how models encode semantic information.
 
 2. **Visualize Semantic Spaces**: Create interactive, intuitive visualizations that transform high-dimensional embedding spaces into comprehensible 2D/3D maps, revealing:
+
    - How concepts cluster together
    - How meanings separate and relate
    - The geometric structure of model knowledge
    - Cross-modal relationships (text, images, etc.)
 
 3. **Enable Explorability**: Build tools that allow researchers and students to:
+
    - Navigate semantic landscapes interactively
    - Query relationships between concepts
    - Discover emergent patterns in model representations
@@ -80,6 +82,12 @@ This project provides a foundational toolkit built with:
 git clone https://github.com/Zografska/cartographers-of-the-invisible.git
 cd cartographers-of-the-invisible
 pip install -e .
+
+# For BERT
+pip install transformers torch numpy
+
+# For Ollama
+pip install ollama numpy
 ```
 
 ### Quick Start
@@ -111,6 +119,7 @@ This project is designed to evolve as research progresses. Future enhancements m
 ## Contributing
 
 This is an educational and research project. Contributions, ideas, and discussions are welcome! Please feel free to:
+
 - Open issues to discuss ideas or report problems
 - Submit pull requests with improvements
 - Share interesting findings from your explorations
@@ -118,6 +127,7 @@ This is an educational and research project. Contributions, ideas, and discussio
 ## Educational Context
 
 This project is designed for students and researchers exploring:
+
 - Natural Language Processing and LLMs
 - Machine Learning interpretability
 - Data visualization and visual analytics
