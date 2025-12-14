@@ -17,6 +17,10 @@ from .utils.visualization import (
     create_plot,
 )
 
+from .embeddings.extractor import (
+    EmbeddingExtractor,
+)
+
 __all__ = [
     "load_data",
     "process_data",
@@ -24,4 +28,5 @@ __all__ = [
     "create_plot",
     "create_heatmap",
     "create_interactive_chart",
+    "EmbeddingExtractor",
 ]
